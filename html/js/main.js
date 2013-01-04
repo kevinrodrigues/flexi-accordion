@@ -1,3 +1,5 @@
 $(function () {
-    $('.accordion-inner').flexiaccordion();
+    $('.accordion-inner').flexiaccordion({
+        speed:  400
+    });
 });

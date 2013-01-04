@@ -10,9 +10,8 @@ e: kevrodrigues116@gmail.com
             
             // overwrite defaults below in your .js file
             var defaults = {
-                speed:  400,                     // set your speed in m-seconds
-                orientation: 'horizontal'       // change to vertical if require
-
+                speed:  400,                 // set your speed in m-seconds
+                isVertical: true      // change to vertical if required
             };
              
             o = $.extend(defaults, o);
@@ -24,18 +23,44 @@ e: kevrodrigues116@gmail.com
                     $accordionHeight = $accordionOpen.innerHeight(),
                     $accordionWidth = $accordionOpen.innerWidth();
 
-                if  ($(this).length && o.orientation === 'horizontal') {
+                function animateAccordion(el, animSize, isVertical) {
+                    
+                    var animStart,
+                        animEnd;
+                    if (isVertical) {
+                        animStart = {width: 0};
+                        animEnd = {width: animSize};
+                    } else {
+                        animStart = {height: 0};
+                        animEnd = {height: animSize};
+                    }
+
+                    $accordionOpen.animate(animStart, {duration : o.speed});
+                    $accordionOpen = $(el).next().css({'display' : 'block'}).animate(animEnd, { duration : o.speed});
+                    /*if (!isVertical) {
+                        $accordionOpen.animate({height : 0}, {duration : o.speed});
+                        $accordionOpen = $(el).next().css({'display' : 'block'}).animate({ height : animSize}, { duration : o.speed});
+
+                    } else {
+                        $accordionOpen.animate({width : 0}, {duration : o.speed});
+                        $accordionOpen = $(el).next().css({'display' : 'block'}).animate({ width : animSize}, { duration : o.speed});
+                    }*/
+
+                }
+
+                if  ($(this).length && o.orientation === false) {
                     $accordion.next().filter(':not(:first)').css({'display' : 'none', height : 0});
+
                     $accordion.click(function () {
                         if ($accordionOpen.prev().get(0) == this) {
                             return;
                         }
-                        
-                        $accordionOpen.animate({height : 0}, {duration : o.speed});
-                        $accordionOpen = $(this).next().css({'display' : 'block'}).animate({ height : $accordionHeight}, { duration : o.speed});
+                        animateAccordion(this, $accordionHeight);
+                    
                     });
 
-                } else if ($(this).length && o.orientation === 'vertical') {
+                } else if ($(this).length && o.isVertical === true) {
+
                     $accordion.next().filter(':not(:first)').css({'display' : 'none', width : 0});
                     $(this).parent().addClass('vertical-headers');
 
@@ -43,9 +68,9 @@ e: kevrodrigues116@gmail.com
                         if ($accordionOpen.prev().get(0) == this) {
                             return;
                         }
-                        
-                        $accordionOpen.animate({width : 0}, {duration : o.speed});
-                        $accordionOpen = $(this).next().css({'display' : 'block'}).animate({ width : $accordionWidth}, { duration : o.speed});
+
+                        animateAccordion(this, $accordionWidth, o.isVertical);
+                        //$accordionOpen.animate({width : 0}, {duration : o.speed});
                     });
 
                 } else {
