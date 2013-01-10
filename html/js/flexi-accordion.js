@@ -11,7 +11,8 @@ e: kevrodrigues116@gmail.com
             // overwrite defaults below in your .js file
             var defaults = {
                 speed:  400,          // set your speed in m-seconds
-                isVertical: true      // set to false if a horizontal accordion is required
+                isVertical: true,     // set to false if a horizontal accordion is required
+                collapsible: true    // set to true to close all panels
             };
              
             o = $.extend(defaults, o);
@@ -44,6 +45,13 @@ e: kevrodrigues116@gmail.com
                     $accordionOpen = $(el).next().css({'display' : 'block'}).animate(animEnd, { duration : o.speed});
                 }
 
+                // function collapsibleAccordion() {
+                //     if (o.collapsible === true) {
+                //         $accordion.next().filter('div').css({width: 0}, {'display' : 'none'});
+
+                //     }
+                // }
+
                 // setting height/width to first element
                 function filterAccordion(dimention, el) {
 
@@ -55,16 +63,23 @@ e: kevrodrigues116@gmail.com
                         dimention = {height : 0};
                     }
 
-                    $accordion.next().filter(':not(:first)').css(dimention, {'display' : 'none'});
+                    if (o.collapsible === false) {
+                        $accordion.next().filter(':not(:first)').css(dimention, {'display' : 'none'});
+                    } else {
+                        $accordion.next().filter('div').css({width: 0}, {'display' : 'none'});
+                    }
+                    
                 }
 
-                // function accordionClicked(el, zero) {
+                function accordionClicked(base) {
 
-                //     if ($accordionOpen.prev().get(zero) == el) {
-                //         return;
-                //     }
+                    console.log('accordionClicked: ' + base);
 
-                // }
+                    if ($accordionOpen.prev().get(0) == base) {
+                        return;
+                    }
+
+                }
 
                 // start main plugin structure
                 if ($(this).length) {
@@ -73,20 +88,26 @@ e: kevrodrigues116@gmail.com
                         filterAccordion($zeroHeight);
 
                         $accordion.click(function () {
-                            // accordionClicked(this, 0);
+
                             if ($accordionOpen.prev().get(0) == this) {
                                 return;
                             }
+
                             animateAccordion(this, $accordionHeight);
                         });
+                        
                     } else if (o.isVertical === true) {
                         filterAccordion($zeroWidth, this);
 
                         $accordion.click(function () {
-                            // accordionClicked(this, 0);
+
+                            console.log('click: ' + this);
+
+                            // accordionClicked(this);
                             if ($accordionOpen.prev().get(0) == this) {
                                 return;
                             }
+                            collapsibleAccordion();
                             animateAccordion(this, $accordionWidth, o.isVertical);
                         });
                     }
