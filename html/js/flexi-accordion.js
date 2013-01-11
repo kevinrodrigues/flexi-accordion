@@ -12,7 +12,9 @@ e: kevrodrigues116@gmail.com
             var defaults = {
                 speed:  400,          // set your speed in m-seconds
                 isVertical: true,     // set to false if a horizontal accordion is required
-                collapsible: true    // set to true to close all panels
+                collapsible: false,   // set to true to close all panels
+                icons: true,          // set to false to hide header icons * NOT IMPLETMENTED YET *
+                hover: 'off'          // set to 'on' to turn on open on hover * NOT IMPLETMENTED YET *
             };
              
             o = $.extend(defaults, o);
@@ -43,14 +45,8 @@ e: kevrodrigues116@gmail.com
                     }
                     $accordionOpen.animate(animStart, {duration : o.speed});
                     $accordionOpen = $(el).next().css({'display' : 'block'}).animate(animEnd, { duration : o.speed});
+
                 }
-
-                // function collapsibleAccordion() {
-                //     if (o.collapsible === true) {
-                //         $accordion.next().filter('div').css({width: 0}, {'display' : 'none'});
-
-                //     }
-                // }
 
                 // setting height/width to first element
                 function filterAccordion(dimention, el) {
@@ -66,7 +62,7 @@ e: kevrodrigues116@gmail.com
                     if (o.collapsible === false) {
                         $accordion.next().filter(':not(:first)').css(dimention, {'display' : 'none'});
                     } else {
-                        $accordion.next().filter('div').css({width: 0}, {'display' : 'none'});
+                        $accordion.next().filter('div').css(dimention, {'display' : 'none'});
                     }
                     
                 }
