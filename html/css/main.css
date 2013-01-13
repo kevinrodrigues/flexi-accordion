@@ -116,10 +116,20 @@ ADJUSTABLE STYLES
 |__/  |__/ \______/ |__/      |__/|________/ \______/ |__/  |__/   \___/   \_______/|__/
 ======================================================================================*/
 
-.accordion-inner h3 {display: block; margin:0 0 2px 0;padding: 10px 0 10px 10px;font-weight: 100;color: #fff;-webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px;background: rgb(162, 35, 67);background: -moz-linear-gradient(90deg, rgb(162, 35, 67) 30%, rgb(213, 68, 104) 70%);background: -webkit-linear-gradient(90deg, rgb(162, 35, 67) 30%, rgb(213, 68, 104) 70%);background: -o-linear-gradient(90deg, rgb(162, 35, 67) 30%, rgb(213, 68, 104) 70%);background: -ms-linear-gradient(90deg, rgb(162, 35, 67) 30%, rgb(213, 68, 104) 70%);background: linear-gradient(180deg, rgb(162, 35, 67) 30%, rgb(213, 68, 104) 70%);}
+.accordion-inner h3 {display: block; margin:0 0 2px 0;padding: 10px 0 10px 10px;font-weight: 100;color: #fff;-webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px;background: rgb(181,189,200);
+background: -moz-linear-gradient(top,  rgba(181,189,200,1) 0%, rgba(130,140,149,1) 36%, rgba(40,52,59,1) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(181,189,200,1)), color-stop(36%,rgba(130,140,149,1)), color-stop(100%,rgba(40,52,59,1)));
+background: -webkit-linear-gradient(top,  rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%);
+background: -o-linear-gradient(top,  rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%);
+background: -ms-linear-gradient(top,  rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%);
+background: linear-gradient(to bottom,  rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', endColorstr='#28343b',GradientType=0 );}
+
 .accordion-inner p {padding: 10px 0 0 10px;color: #666;margin: 0;}
 .accordion-inner h3:hover {cursor: pointer;background: rgb(162, 35, 67);background: -moz-linear-gradient(270deg, rgb(162, 35, 67) 30%, rgb(213, 68, 104) 70%);background: -webkit-linear-gradient(270deg, rgb(162, 35, 67) 30%, rgb(213, 68, 104) 70%);background: -o-linear-gradient(270deg, rgb(162, 35, 67) 30%, rgb(213, 68, 104) 70%);background: -ms-linear-gradient(270deg, rgb(162, 35, 67) 30%, rgb(213, 68, 104) 70%);background: linear-gradient(0deg, rgb(162, 35, 67) 30%, rgb(213, 68, 104) 70%);}
 .accordion-inner {margin: 10px;overflow: hidden;}
+.accordion-inner h3 span { float: right; display: block; width: 37px; height: 36px; margin: -6px 20px 0 0; background: url(../img/plus-minus.png) no-repeat 0 0;}
+.accordion-inner h3.active span {background-position: 0 bottom;}
 
 /* =====================================================================================
  /$$    /$$                      /$$     /$$                     /$$
@@ -132,9 +142,17 @@ ADJUSTABLE STYLES
     \_/    \_______/|__/         \___/  |__/ \_______/ \_______/|__/                                     
 ======================================================================================*/
 
-.vertical-headers .accordion-inner h3 {height: 450px; width: 50px;float: left;}
+.vertical-headers .accordion-inner h3 {height: 450px; width: 50px;float: left; background: rgb(40,52,59);
+background: -moz-linear-gradient(left,  rgba(40,52,59,1) 0%, rgba(130,140,149,1) 64%, rgba(181,189,200,1) 100%);
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(40,52,59,1)), color-stop(64%,rgba(130,140,149,1)), color-stop(100%,rgba(181,189,200,1)));
+background: -webkit-linear-gradient(left,  rgba(40,52,59,1) 0%,rgba(130,140,149,1) 64%,rgba(181,189,200,1) 100%);
+background: -o-linear-gradient(left,  rgba(40,52,59,1) 0%,rgba(130,140,149,1) 64%,rgba(181,189,200,1) 100%);
+background: -ms-linear-gradient(left,  rgba(40,52,59,1) 0%,rgba(130,140,149,1) 64%,rgba(181,189,200,1) 100%);
+background: linear-gradient(to right,  rgba(40,52,59,1) 0%,rgba(130,140,149,1) 64%,rgba(181,189,200,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#28343b', endColorstr='#b5bdc8',GradientType=1 );
+}
 .vertical-headers .accordion-inner div {float: left;max-width: 400px; height: 450px;}
-
+.vertical-headers .accordion-inner h3 span {float:none; margin: 384px 20px 0 0;}
 /*============================================
 REQUIRED STYLES FOR BOTH VERTICAL & HORIZONTAL
 ==============================================*/

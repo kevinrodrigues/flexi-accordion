@@ -11,8 +11,8 @@ e: kevrodrigues116@gmail.com
             // overwrite defaults below in your .js file
             var defaults = {
                 speed:  400,          // set your speed in m-seconds
-                isVertical: true,     // set to false if a horizontal accordion is required
-                collapsible: false,   // set to true to close all panels
+                isVertical: false,    // set to false if a horizontal accordion is required
+                collapsible: true,    // set to true to close all panels
                 icons: true,          // set to false to hide header icons * NOT IMPLETMENTED YET *
                 hover: 'off'          // set to 'on' to turn on open on hover * NOT IMPLETMENTED YET *
             };
@@ -60,22 +60,33 @@ e: kevrodrigues116@gmail.com
                     }
 
                     if (o.collapsible === false) {
-                        $accordion.next().filter(':not(:first)').css(dimention, {'display' : 'none'});
+                        $accordion.next().filter(':not(:first)').css(dimention, {'display' : 'none'})
+                            .end().end().end().find('h3').filter(':first').addClass('active');
+
                     } else {
                         $accordion.next().filter('div').css(dimention, {'display' : 'none'});
                     }
                     
                 }
 
-                function accordionClicked(base) {
+                function iconsOn(clickedItem) {
 
-                    console.log('accordionClicked: ' + base);
-
-                    if ($accordionOpen.prev().get(0) == base) {
-                        return;
+                    if (o.icons === true) {
+                        $accordion.append('<span></span>');
                     }
 
+                    clickedItem.click(function () {
+                        if ($(this).hasClass('active')) {
+                            return;
+                        } else {
+                            $(this).addClass('active').siblings().removeClass('active');
+                        }
+                       
+                    });
+
                 }
+                // excute icons function here
+                iconsOn($accordion);
 
                 // start main plugin structure
                 if ($(this).length) {
@@ -90,6 +101,7 @@ e: kevrodrigues116@gmail.com
                             }
 
                             animateAccordion(this, $accordionHeight);
+
                         });
                         
                     } else if (o.isVertical === true) {
@@ -97,13 +109,12 @@ e: kevrodrigues116@gmail.com
 
                         $accordion.click(function () {
 
-                            console.log('click: ' + this);
+                            // console.log('click: ' + this);
 
-                            // accordionClicked(this);
                             if ($accordionOpen.prev().get(0) == this) {
                                 return;
                             }
-                            collapsibleAccordion();
+
                             animateAccordion(this, $accordionWidth, o.isVertical);
                         });
                     }
