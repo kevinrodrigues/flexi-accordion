@@ -11,10 +11,11 @@ e: kevrodrigues116@gmail.com
             // overwrite defaults below in your .js file
             var defaults = {
                 speed:  400,          // set your speed in m-seconds
-                isVertical: false,    // set to false if a horizontal accordion is required
-                collapsible: true,    // set to true to close all panels
-                icons: true,          // set to false to hide header icons * NOT IMPLETMENTED YET *
-                hover: 'off'          // set to 'on' to turn on open on hover * NOT IMPLETMENTED YET *
+                isVertical: true,    // set to false if a horizontal accordion is required
+                collapsible: false,    // set to true to close all panels
+                icons: false,          // set to false to hide header icons
+                hover: 'off',         // set to 'on' to turn on open on hover
+                responsive: 'off'     // set to on to make it responsive
             };
              
             o = $.extend(defaults, o);
@@ -23,6 +24,8 @@ e: kevrodrigues116@gmail.com
 
                 // global variables
                 var $accordion = $(this).find('h3'),
+                    $accordionOuter = $(this),
+                    $accordionDiv = $accordion.next(),
                     $accordionOpen = $accordion.next().filter(':first'),
                     $accordionHeight = $accordionOpen.innerHeight(),
                     $accordionWidth = $accordionOpen.innerWidth(),
@@ -69,24 +72,78 @@ e: kevrodrigues116@gmail.com
                     
                 }
 
-                function iconsOn(clickedItem) {
+                // hover icons on/off function
+                function iconsOn(clickedItem, hoverItem) {
 
                     if (o.icons === true) {
                         $accordion.append('<span></span>');
                     }
 
-                    clickedItem.click(function () {
-                        if ($(this).hasClass('active')) {
-                            return;
-                        } else {
-                            $(this).addClass('active').siblings().removeClass('active');
-                        }
+                    if (o.icons === true && o.hover === 'on') {
+                        
+                        hoverItem.hover(function () {
+                            if ($(this).hasClass('active')) {
+                                return;
+                            } else {
+                                $(this).addClass('active').siblings().removeClass('active');
+                            }
                        
-                    });
+                        });
+
+                    } else {
+
+                        clickedItem.click(function () {
+                            if ($(this).hasClass('active')) {
+                                return;
+                            } else {
+                                $(this).addClass('active').siblings().removeClass('active');
+                            }
+                        });
+
+                    }
 
                 }
-                // excute icons function here
-                iconsOn($accordion);
+
+                iconsOn($accordion, $accordion);
+
+                // open on hover function
+                function hover() {
+
+                    if (o.hover === 'on' && o.isVertical === false) {
+                        $accordion.hover(function () {
+
+                            if ($accordionOpen.prev().get(0) == this || $accordionOpen.is(':animated')) {
+                                return;
+                            }
+
+                            animateAccordion(this, $accordionHeight);
+
+                        });
+
+                    } else if (o.hover === 'on' && o.isVertical === true) {
+                        $accordion.hover(function () {
+
+                            if ($accordionOpen.prev().get(0) == this || $accordionOpen.is(':animated')) {
+                                return;
+                            }
+
+                            animateAccordion(this, $accordionWidth, o.isVertical);
+
+                        });
+                    }
+                }
+
+                hover();
+
+                function responsive(respond) {
+
+                    if (o.responsive === 'on') {
+                        $(respond).parent().css('width', '100%').find($accordionDiv).css('width', '40%');
+                    }
+
+                }
+
+                responsive($accordionOuter);
 
                 // start main plugin structure
                 if ($(this).length) {
